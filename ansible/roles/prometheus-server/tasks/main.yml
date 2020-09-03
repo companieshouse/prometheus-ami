@@ -1,1 +1,29 @@
 ---
+- name: create prometheus directory structure
+  file: >
+    state=directory
+    path={{ item }}
+    owner=root
+    group=root
+  with_items:
+    - "{{ prometheus_root_dir }}"
+    - "{{ prometheus_dist_dir }}"
+    - "{{ prometheus_config_dir }}"
+
+- name: download prometheus tarball
+  get_url: url={{ prometheus_tar_gz_url }}
+           dest={{ prometheus_dist_dir }}/{{ prometheus_tar_gz }} validate_certs=no
+
+- name: extract tarball
+  unarchive: src={{ prometheus_dist_dir }}/{{ prometheus_tar_gz }} dest={{ prometheus_dist_dir }}
+             copy=no creates={{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64/prometheus
+
+- name: symlink to prometheus server folder
+  file:
+    src: "{{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64"
+    dest: "{{prometheus_server_dir }}"
+    state: link
+
+- name: create default prometheus config file
+  copy: src=prometheus.yml dest={{ prometheus_config_dir }}/prometheus.yml mode=0555
+
