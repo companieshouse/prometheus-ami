@@ -1,1 +1,6 @@
 ---
+
+- hosts: prometheus
+  become: true
+  roles:
+    - prometheus-server
