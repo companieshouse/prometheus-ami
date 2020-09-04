@@ -16,7 +16,7 @@ prometheus_group: "prometheus"
 
 # Volume mounts
 volume_mounts:
-  - device: /dev/nvme1n1
+  - device: /dev/xvdb
     file_system_type: ext4
     logical_volume: lv_prometheus_data
     mode: "0755"
