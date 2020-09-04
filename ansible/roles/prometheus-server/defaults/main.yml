@@ -19,7 +19,7 @@ volume_mounts:
   - device: /dev/nvme1n1
     file_system_type: ext4
     logical_volume: lv_prometheus_data
-    mode: "0744"
+    mode: "0755"
     mount_point: "{{ prometheus_data_dir }}"
     group: "{{ prometheus_group }}"
     owner: "{{ prometheus_user }}"
