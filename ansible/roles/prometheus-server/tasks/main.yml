@@ -53,7 +53,7 @@
   copy:
     src: "prometheus.yml"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
-    mode: "0555"
+    mode: "0644"
 
 - name: configure prometheus service
   template:
