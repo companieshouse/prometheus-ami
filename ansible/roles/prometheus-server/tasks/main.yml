@@ -58,7 +58,7 @@
     src: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
     dest: "{{ prometheus_dist_dir }}"
     copy: "no"
-    creates: "{{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64/prometheus"
+    creates: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
 
 - name: cleanup tarball
   file:
@@ -67,7 +67,7 @@
 
 - name: symlink to prometheus server folder
   file:
-    src: "{{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64"
+    src: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64"
     dest: "{{ prometheus_server_dir }}"
     state: link
 
