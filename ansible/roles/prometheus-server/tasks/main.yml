@@ -49,13 +49,11 @@
     dest: "{{prometheus_server_dir }}"
     state: link
 
-
 - name: default prometheus config file
   copy:
     src: "prometheus.yml"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     mode: "0555"
-
 
 - name: configure prometheus service
   template:
