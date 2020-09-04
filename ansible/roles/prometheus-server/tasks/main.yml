@@ -45,7 +45,7 @@
 - name: symlink to prometheus server folder
   file:
     src: "{{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64"
-    dest: "{{prometheus_server_dir }}"
+    dest: "{{ prometheus_server_dir }}"
     state: link
 
 - name: default prometheus config file
