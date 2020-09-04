@@ -38,6 +38,11 @@
     copy: "no"
     creates: "{{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64/prometheus"
 
+- name: cleanup tarball
+  file:
+    state: absent
+    path: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
+
 - name: symlink to prometheus server folder
   file:
     src: "{{ prometheus_dist_dir }}/prometheus-{{prometheus_version}}.linux-amd64"
