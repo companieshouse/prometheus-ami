@@ -22,7 +22,6 @@
     - "{{ prometheus_root_dir }}"
     - "{{ prometheus_dist_dir }}"
     - "{{ prometheus_config_dir }}"
-    - "{{ prometheus_server_dir }}"
     - "{{ prometheus_data_dir }}"
 
 - name: download prometheus tarball
