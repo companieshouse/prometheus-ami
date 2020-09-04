@@ -51,3 +51,14 @@
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     mode: "0555"
 
+
+- name: configure prometheus service
+  template:
+    src: "etc/systemd/system/prometheus.service.j2"
+    dest: "/etc/systemd/system/prometheus.service"
+
+- name: set prometheus service state
+  service:
+    name: "prometheus"
+    state: "started"
+    enabled: "yes"
