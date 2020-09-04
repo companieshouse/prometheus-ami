@@ -1,10 +1,23 @@
 ---
+- name: ensure {{ prometheus_group }} group exists
+  become: yes
+  group:
+    name: "{{ prometheus_group }}"
+    system: yes
+
+- name: ensure {{ prometheus_user }} user exists
+  become: yes
+  user:
+    name: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    system: yes
+
 - name: prometheus directory structure
   file: >
     state=directory
     path={{ item }}
-    owner=root
-    group=root
+    owner={{ prometheus_user }}
+    group={{ prometheus_group }}
   with_items:
     - "{{ prometheus_root_dir }}"
     - "{{ prometheus_dist_dir }}"

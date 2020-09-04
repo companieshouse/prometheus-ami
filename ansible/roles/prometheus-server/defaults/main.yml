@@ -8,3 +8,6 @@ prometheus_root_dir: /opt/prometheus
 prometheus_config_dir: /etc/prometheus
 prometheus_server_dir: "{{ prometheus_root_dir }}/prometheus-server"
 prometheus_dist_dir: "{{ prometheus_root_dir }}/dist"
+
+prometheus_user: "prometheus"
+prometheus_group: "prometheus"
