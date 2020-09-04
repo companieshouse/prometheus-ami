@@ -13,11 +13,11 @@
     system: yes
 
 - name: prometheus directory structure
-  file: >
-    state=directory
-    path={{ item }}
-    owner={{ prometheus_user }}
-    group={{ prometheus_group }}
+  file:
+    state: "directory"
+    path: "{{ item }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
   with_items:
     - "{{ prometheus_root_dir }}"
     - "{{ prometheus_dist_dir }}"
