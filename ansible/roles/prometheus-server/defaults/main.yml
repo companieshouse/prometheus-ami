@@ -1,5 +1,6 @@
 ---
 
+# Prometheus
 prometheus_version: 2.20.1
 prometheus_tar_gz: "prometheus-{{prometheus_version}}.linux-amd64.tar.gz"
 prometheus_tar_gz_url: "https://github.com/prometheus/prometheus/releases/download/v{{prometheus_version}}/{{ prometheus_tar_gz }}"
@@ -12,3 +13,16 @@ prometheus_data_dir: "/prometheusdata"
 
 prometheus_user: "prometheus"
 prometheus_group: "prometheus"
+
+# Volume mounts
+volume_mounts:
+  - device: /dev/nvme1n1
+    file_system_type: ext4
+    logical_volume: lv_prometheus_data
+    mode: "0744"
+    mount_point: "{{ prometheus_data_dir }}"
+    group: "{{ prometheus_group }}"
+    owner: "{{ prometheus_user }}"
+    volume_group: vg.prometheus
+    options:
+      - defaults
