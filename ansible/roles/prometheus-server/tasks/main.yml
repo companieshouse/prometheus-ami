@@ -29,10 +29,6 @@
     - "{{ prometheus_config_dir }}"
     - "{{ prometheus_data_dir }}"
 
-- name: check if prometheus tarball exists locally
-  stat:
-    path: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
-  register: prometheus_tar
 - name: Get AWS Credentials
   set_fact:
     aws_access_key_id: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
