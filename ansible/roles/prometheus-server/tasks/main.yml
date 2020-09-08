@@ -73,9 +73,3 @@
   template:
     src: "etc/systemd/system/prometheus.service.j2"
     dest: "/etc/systemd/system/prometheus.service"
-
-- name: Set prometheus service state
-  service:
-    name: "prometheus"
-    state: "started"
-    enabled: "yes"
