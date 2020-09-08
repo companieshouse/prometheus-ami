@@ -49,7 +49,7 @@
   unarchive:
     src: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
     dest: "{{ prometheus_dist_dir }}"
-    remote_src: "no"
+    remote_src: yes
     creates: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
 
 - name: Cleanup tarball
