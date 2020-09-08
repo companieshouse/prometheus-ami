@@ -1,23 +1,23 @@
 ---
 
-- name: ensure {{ prometheus_group }} group exists
+- name: Ensure {{ prometheus_group }} group exists
   become: yes
   group:
     name: "{{ prometheus_group }}"
     system: yes
 
-- name: ensure {{ prometheus_user }} user exists
+- name: Ensure {{ prometheus_user }} user exists
   become: yes
   user:
     name: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     system: yes
 
-- name: configure volume mounts
+- name: Configure volume mounts
   include_role:
     name: mounted-volume
 
-- name: prometheus directory structure
+- name: Ensure Prometheus directory structure exists
   file:
     state: "directory"
     path: "{{ item }}"
@@ -49,36 +49,36 @@
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
 
-- name: extract tarball
+- name: Extract tarball
   unarchive:
     src: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
     dest: "{{ prometheus_dist_dir }}"
     copy: "no"
     creates: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
 
-- name: cleanup tarball
+- name: Cleanup tarball
   file:
     state: absent
     path: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
 
-- name: symlink to prometheus server folder
+- name: Symlink to Prometheus server folder
   file:
     src: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64"
     dest: "{{ prometheus_server_dir }}"
     state: link
 
-- name: default prometheus config file
+- name: Define default prometheus config file
   copy:
     src: "prometheus.yml"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     mode: "0644"
 
-- name: configure prometheus service
+- name: Configure prometheus service
   template:
     src: "etc/systemd/system/prometheus.service.j2"
     dest: "/etc/systemd/system/prometheus.service"
 
-- name: set prometheus service state
+- name: Set prometheus service state
   service:
     name: "prometheus"
     state: "started"
