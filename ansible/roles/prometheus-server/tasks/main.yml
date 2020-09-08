@@ -13,17 +13,9 @@
     group: "{{ prometheus_user }}"
     system: yes
 
-- name: check existing volume mounts
-  set_fact:
-    volume_mounted: "{{ ansible_mounts | selectattr('mount', 'match', prometheus_data_dir) | list | length > 0 }}"
-
 - name: configure volume mounts
   include_role:
     name: mounted-volume
-  when:
-    - not volume_mounted
-    - volume_mounts is defined
-    - volume_mounts != ""
 
 - name: prometheus directory structure
   file:
