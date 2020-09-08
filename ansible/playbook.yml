@@ -3,4 +3,6 @@
 - hosts: prometheus
   become: true
   roles:
+    - epel
+    - pip
     - prometheus-server

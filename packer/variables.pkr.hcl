@@ -45,6 +45,16 @@ variable "playbook_file_path" {
   description = "The relative path to the Ansible playbook file"
 }
 
+variable "resource_bucket_name" {
+  type        = string
+  description = "The name of the S3 resources bucket"
+}
+
+variable "resource_bucket_prefix" {
+  type        = string
+  description = "The object prefix for Prometheus packages within the S3 resources bucket"
+}
+
 variable "root_volume_size_gb" {
   type        = number
   default     = 20
