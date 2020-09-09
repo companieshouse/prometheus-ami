@@ -13,10 +13,6 @@
     group: "{{ prometheus_user }}"
     system: yes
 
-- name: Configure volume mounts
-  include_role:
-    name: mounted-volume
-
 - name: Ensure Prometheus directory structure exists
   file:
     state: "directory"

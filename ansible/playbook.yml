@@ -6,3 +6,4 @@
     - epel
     - pip
     - prometheus-server
+    - mounted-volume
