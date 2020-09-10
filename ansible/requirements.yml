@@ -2,7 +2,7 @@
 
 - src: https://github.com/companieshouse/ansible-role-mounted-volume
   name: mounted-volume
-  version: "1.0.4"
+  version: "1.0.5"
 
 - src: https://github.com/geerlingguy/ansible-role-repo-epel
   name: epel

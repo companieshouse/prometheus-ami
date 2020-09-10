@@ -18,8 +18,6 @@ volume_mounts:
     logical_volume: prometheus
     mode: "0755"
     mount_point: "{{ prometheus_data_dir }}"
-    group: "{{ prometheus_group }}"
-    owner: "{{ prometheus_user }}"
     volume_group: data
     options:
       - defaults
