@@ -13,6 +13,13 @@ source "amazon-ebs" "builder" {
     delete_on_termination = true
   }
 
+  launch_block_device_mappings {
+    device_name = "/dev/xvdb"
+    volume_size = var.data_volume_size_gb
+    volume_type = "gp2"
+    delete_on_termination = true
+  }
+  
   security_group_filter {
     filters = {
       "group-name": "packer-builders-${var.aws_region}"
@@ -22,10 +29,10 @@ source "amazon-ebs" "builder" {
   source_ami_filter {
     filters = {
       virtualization-type = "hvm"
-      name =  "${var.source_ami_filter_name}"
+      name =  "${var.aws_source_ami_filter_name}"
       root-device-type = "ebs"
     }
-    owners = ["${var.source_ami_owner_id}"]
+    owners = ["${var.aws_source_ami_owner_id}"]
     most_recent = true
   }
 

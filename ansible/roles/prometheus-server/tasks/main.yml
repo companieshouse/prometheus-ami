@@ -1,0 +1,68 @@
+---
+
+- name: Ensure {{ prometheus_group }} group exists
+  become: yes
+  group:
+    name: "{{ prometheus_group }}"
+    system: yes
+
+- name: Ensure {{ prometheus_user }} user exists
+  become: yes
+  user:
+    name: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    system: yes
+
+- name: Set ownership and permissions for root directory of mounted filesystem
+  file:
+    path: "{{ prometheus_data_dir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: "0755"
+
+- name: Ensure Prometheus directory structure exists
+  file:
+    state: "directory"
+    path: "{{ item }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+  with_items:
+    - "{{ prometheus_root_dir }}"
+    - "{{ prometheus_dist_dir }}"
+    - "{{ prometheus_config_dir }}"
+
+- name: Download Prometheus tarball from S3
+  aws_s3:
+    bucket: "{{ resource_bucket_name }}"
+    object: "{{ resource_bucket_prefix }}/{{ prometheus_tar_gz }}"
+    dest: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
+    mode: get
+
+- name: Extract tarball
+  unarchive:
+    src: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
+    dest: "{{ prometheus_dist_dir }}"
+    remote_src: yes
+    creates: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
+
+- name: Cleanup tarball
+  file:
+    state: absent
+    path: "{{ prometheus_dist_dir }}/{{ prometheus_tar_gz }}"
+
+- name: Symlink to Prometheus server folder
+  file:
+    src: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64"
+    dest: "{{ prometheus_server_dir }}"
+    state: link
+
+- name: Define default prometheus config file
+  copy:
+    src: "prometheus.yml"
+    dest: "{{ prometheus_config_dir }}/prometheus.yml"
+    mode: "0644"
+
+- name: Configure prometheus service
+  template:
+    src: "{{ prometheus_service_dir }}/prometheus.service.j2"
+    dest: "/{{ prometheus_service_dir }}/prometheus.service"

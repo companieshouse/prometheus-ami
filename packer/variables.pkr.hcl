@@ -1,10 +1,12 @@
 variable "ami_name_prefix" {
   type        = string
+  default     = "prometheus-ami"
   description = "The prefix string that will be used for the name tags of the resulting AMI and snapshot(s); the version string will be appended automatically"
 }
 
 variable "ansible_host_alias" {
   type        = string
+  default     = "prometheus"
   description = "The Ansible host alias"
 }
 
@@ -43,10 +45,26 @@ variable "playbook_file_path" {
   description = "The relative path to the Ansible playbook file"
 }
 
+variable "resource_bucket_name" {
+  type        = string
+  description = "The name of the S3 resources bucket"
+}
+
+variable "resource_bucket_prefix" {
+  type        = string
+  description = "The object prefix for Prometheus packages within the S3 resources bucket"
+}
+
 variable "root_volume_size_gb" {
   type        = number
   default     = 20
   description = "The EC2 instance root volume size in Gibibytes (GiB)"
+}
+
+variable "data_volume_size_gb" {
+  type        = number
+  default     = 100
+  description = "The EC2 instance data volume size in Gibibytes (GiB)"
 }
 
 variable "ssh_username" {

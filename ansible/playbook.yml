@@ -1,1 +1,9 @@
 ---
+
+- hosts: prometheus
+  become: true
+  roles:
+    - mounted-volume
+    - epel
+    - pip
+    - prometheus-server
