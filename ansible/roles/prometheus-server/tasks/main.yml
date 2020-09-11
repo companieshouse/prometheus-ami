@@ -58,5 +58,5 @@
 
 - name: Configure prometheus service
   template:
-    src: "etc/systemd/system/prometheus.service.j2"
-    dest: "/etc/systemd/system/prometheus.service"
+    src: "{{ prometheus_service_dir }}/prometheus.service.j2"
+    dest: "/{{ prometheus_service_dir }}/prometheus.service"

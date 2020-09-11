@@ -8,6 +8,7 @@ prometheus_config_dir: /etc/prometheus
 prometheus_server_dir: "{{ prometheus_root_dir }}/prometheus-server"
 prometheus_dist_dir: "{{ prometheus_root_dir }}/dist"
 prometheus_data_dir: /var/opt/prometheus/data
+prometheus_service_dir: "etc/systemd/system/"
 
 prometheus_user: "prometheus"
 prometheus_group: "prometheus"
