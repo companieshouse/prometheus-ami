@@ -23,5 +23,5 @@ aws_region  | AWS region to create the AMI | eu-west-2
 aws_subnet_filter_name  | A valid filter (wildcards allowed) to select subnet for the builder when creating the AMI | example-subnet-name-*
 version | SEMVER version number used in the AMI name | 1.0.0
 
-### prometheus.yml
+### Service Configuration
 The AMI will be built with a generic `prometheus.yml` configuration which configures Prometheus to monitor itself (similar to [this example](https://github.com/prometheus/prometheus/blob/8219b442c864d0807ae2e3b377587cba626bba22/documentation/examples/prometheus.yml)) and can be used for any basic testing as required. Specific EC2 instances and environments created from this AMI should replace this file with their own targets and requirements.
