@@ -16,8 +16,5 @@ volume_mounts:
   - device: /dev/xvdb
     file_system_type: ext4
     logical_volume: prometheus
-    mode: "0755"
     mount_point: "{{ prometheus_data_dir }}"
     volume_group: data
-    options:
-      - defaults
