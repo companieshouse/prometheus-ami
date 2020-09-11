@@ -25,13 +25,6 @@
     - "{{ prometheus_config_dir }}"
     - "{{ prometheus_data_dir }}"
 
-- name: Get AWS Credentials
-  set_fact:
-    aws_access_key_id: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
-    aws_secret_access_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
-    cacheable: no
-  no_log: True
-
 - name: Download Prometheus tarball from S3
   aws_s3:
     bucket: "{{ resource_bucket_name }}"
