@@ -1,9 +1,11 @@
 source "amazon-ebs" "builder" {
-  ami_name      = "${var.ami_name_prefix}-${var.version}"
-  communicator  = "ssh"
-  instance_type = var.aws_instance_type
-  region        = var.aws_region
-  ssh_username  = var.ssh_username
+  ami_name             = "${var.ami_name_prefix}-${var.version}"
+  communicator         = "ssh"
+  instance_type        = var.aws_instance_type
+  region               = var.aws_region
+  ssh_private_key_file = var.ssh_private_key_file
+  ssh_username         = var.ssh_username
+  ssh_keypair_name     = "packer-builders-${var.aws_region}"
   iam_instance_profile = "packer-builders-${var.aws_region}"
 
   launch_block_device_mappings {
@@ -19,7 +21,7 @@ source "amazon-ebs" "builder" {
     volume_type = "gp2"
     delete_on_termination = true
   }
-  
+
   security_group_filter {
     filters = {
       "group-name": "packer-builders-${var.aws_region}"
