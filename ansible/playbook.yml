@@ -7,3 +7,4 @@
     - epel
     - pip
     - prometheus-server
+    - prometheus-github-exporter

@@ -6,3 +6,4 @@ pip_install_packages:
   - name: botocore
     version: "1.17.56"
 
+github_exporter_tag: "release-1.0.2"
