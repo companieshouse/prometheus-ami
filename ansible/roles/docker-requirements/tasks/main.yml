@@ -1,0 +1,11 @@
+---
+
+- name: Ensure iptables is installed
+  become: true
+  become_user: root
+  package:
+    name: iptables
+    state: present
+  when:
+     - ansible_distribution == "CentOS"
+     - ansible_distribution_major_version == "8"

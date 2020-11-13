@@ -6,5 +6,7 @@
     - mounted-volume
     - epel
     - pip
+    - docker-requirements
+    - docker
     - prometheus-server
     - prometheus-github-exporter
