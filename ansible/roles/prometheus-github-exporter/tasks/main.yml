@@ -1,0 +1,25 @@
+---
+
+- name: Verify service groups exists
+  group:
+    name: githubexporter
+    state: present
+
+- name: Verify service user exists
+  user:
+    name: githubexporter
+    shell: /sbin/nologin
+    groups:
+      - githubexporter
+      - docker
+    append: yes
+
+- name: Download the container
+  become_user: githubexporter
+  become: yes
+  docker_container:
+    image: "infinityworks/github-exporter:{{ github_exporter_tag }}"
+    name: github-exporter
+    exposed_ports: "9171"
+    state: stopped
+    user: githubexporter
