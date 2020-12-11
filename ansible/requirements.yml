@@ -16,7 +16,7 @@
   name: docker
   version: "2.9.0"
 
-- src: https://github.com/cloudalchemy/ansible-node-exporter/archive/0.22.0.tar.gz
+- src: https://github.com/cloudalchemy/ansible-node-exporter
   name: prometheus-node-exporter
   version: "0.22.0"
   
