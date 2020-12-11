@@ -10,3 +10,4 @@
     - docker
     - prometheus-server
     - prometheus-github-exporter
+    - prometheus-node-exporter
