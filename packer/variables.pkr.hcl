@@ -1,3 +1,8 @@
+variable "ami_account_ids" {
+  type        = list(string)
+  description = "A list of account IDs that have access to launch the resulting AMI(s)"
+}
+
 variable "ami_name_prefix" {
   type        = string
   default     = "prometheus-ami"
@@ -63,7 +68,7 @@ variable "root_volume_size_gb" {
 
 variable "data_volume_size_gb" {
   type        = number
-  default     = 100
+  default     = 20
   description = "The EC2 instance data volume size in Gibibytes (GiB)"
 }
 
