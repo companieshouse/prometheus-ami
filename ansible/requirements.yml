@@ -13,9 +13,13 @@ roles:
     name: pip
     version: "2.0.0"
 
-  - src: https://github.com/geerlingguy/ansible-role-docker
+  # - src: https://github.com/geerlingguy/ansible-role-docker
+  #   name: docker
+  #   version: "2.9.0"
+
+  - src: https://github.com/NixM0nk3y/ansible-role-docker
     name: docker
-    version: "2.9.0"
+    version: "3.0.0"
 
   - src: https://github.com/cloudalchemy/ansible-node-exporter
     name: prometheus-node-exporter
