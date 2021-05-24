@@ -18,7 +18,7 @@
   become_user: githubexporter
   become: yes
   vars:
-    ansible_python_interpreter: /usr/bin/python3
+    ansible_python_interpreter: "{{ python_interpreter }}"
   docker_container:
     image: "infinityworks/github-exporter:{{ github_exporter_tag }}"
     name: github-exporter

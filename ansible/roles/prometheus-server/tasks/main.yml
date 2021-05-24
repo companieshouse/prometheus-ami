@@ -33,7 +33,7 @@
 
 - name: Download Prometheus tarball from S3
   vars:
-    ansible_python_interpreter: /usr/bin/python3
+    ansible_python_interpreter: "{{ python_interpreter }}"
   aws_s3:
     bucket: "{{ resource_bucket_name }}"
     object: "{{ resource_bucket_prefix }}/{{ prometheus_tar_gz }}"
