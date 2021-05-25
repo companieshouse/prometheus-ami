@@ -5,7 +5,7 @@ roles:
     name: mounted-volume
     version: "1.0.5"
 
-  - src: https://github.com/robertdebock/ansible-role-epel
+  - src: https://github.com/companieshouse/ansible-role-epel
     name: epel
     version: 3.0.4
 
@@ -13,7 +13,7 @@ roles:
     name: pip
     version: "2.0.0"
 
-  - src: https://github.com/NixM0nk3y/ansible-role-docker
+  - src: https://github.com/companieshouse/ansible-role-docker
     name: docker
     version: "3.0.0"
 
