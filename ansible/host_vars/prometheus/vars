@@ -1,15 +1,11 @@
 ---
 
+python_interpreter: /usr/bin/python3
 pip_install_packages:
   - name: boto3
-    version: "1.14.56"
   - name: botocore
-    version: "1.17.56"
   - name: docker-py
-    version: "1.10.6"
 
 github_exporter_tag: "release-1.0.2"
 
 node_exporter_version: 1.0.1
-
-docker_package: docker-ce-19.03.14

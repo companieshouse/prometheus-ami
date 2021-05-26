@@ -17,7 +17,7 @@ variable "ansible_host_alias" {
 
 variable "aws_instance_type" {
   type        = string
-  default     = "t2.small"
+  default     = "t3.small"
   description = "The EC2 instance type used when building the AMI"
 }
 
@@ -29,19 +29,31 @@ variable "aws_region" {
 
 variable "aws_source_ami_filter_name" {
   type        = string
-  default     = "CentOS 8* x86_64*"
+  default     = "amzn2-ami-hvm-2.0*x86_64-gp2"
   description = "The source AMI filter string. Any filter described by the DescribeImages API documentation is valid. If multiple images match then the latest will be used"
 }
 
 variable "aws_source_ami_owner_id" {
   type        = string
-  default     = "125523088429"
+  default     = "137112412989"
   description = "The source AMI owner ID; used in combination with aws_source_ami_filter_name to filter for matching source AMIs"
 }
 
 variable "aws_subnet_filter_name" {
   type        = string
   description = "The subnet filter string. Any filter described by the DescribeSubnets API documentation is valid. If multiple subnets match then the one with the most IPv4 addresses free will be used"
+}
+
+variable "force_delete_snapshot" {
+  type        = bool
+  default     = false
+  description = "Delete snapshots associated with AMIs, which have been deregistered by force_deregister"
+}
+
+variable "force_deregister" {
+  type        = bool
+  default     = false
+  description = "Deregister an existing AMI if one with the same name already exists"
 }
 
 variable "playbook_file_path" {
@@ -80,7 +92,7 @@ variable "ssh_private_key_file" {
 
 variable "ssh_username" {
   type        = string
-  default     = "centos"
+  default     = "ec2-user"
   description = "The username Packer will use when connecting with SSH"
 }
 
