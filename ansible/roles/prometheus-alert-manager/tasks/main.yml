@@ -13,13 +13,6 @@
     group: "{{ alertmanager_group }}"
     system: yes
 
-- name: Set ownership and permissions for root directory of mounted filesystem
-  file:
-    path: "{{ alertmanager_data_dir }}"
-    owner: "{{ alertmanager_user }}"
-    group: "{{ alertmanager_group }}"
-    mode: "0755"
-
 - name: Ensure Prometheus alertmanager directory structure exists
   file:
     state: "directory"
@@ -31,6 +24,14 @@
     - "{{ prometheus_dist_dir }}"
     - "{{ alertmanager_server_dir }}"
     - "{{ alertmanager_config_dir }}"
+    - "{{ alertmanager_data_dir }}"
+
+- name: Set ownership and permissions for root directory of mounted filesystem
+  file:
+    path: "{{ alertmanager_data_dir }}"
+    owner: "{{ alertmanager_user }}"
+    group: "{{ alertmanager_group }}"
+    mode: "0755"
 
 - name: Download Prometheus alertmanager tarball from S3
   vars:
