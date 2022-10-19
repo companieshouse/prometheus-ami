@@ -11,3 +11,4 @@
     - prometheus-server
     - prometheus-github-exporter
     - prometheus-node-exporter
+    - prometheus-alert-manager

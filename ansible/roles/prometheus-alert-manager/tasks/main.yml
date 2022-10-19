@@ -1,0 +1,76 @@
+---
+
+- name: Ensure {{ alertmanager_group }} group exists
+  become: yes
+  group:
+    name: "{{ alertmanager_group }}"
+    system: yes
+
+- name: Ensure {{ alertmanager_user }} user exists
+  become: yes
+  user:
+    name: "{{ alertmanager_user }}"
+    group: "{{ alertmanager_group }}"
+    system: yes
+
+- name: Set ownership and permissions for root directory of mounted filesystem
+  file:
+    path: "{{ alertmanager_data_dir }}"
+    owner: "{{ alertmanager_user }}"
+    group: "{{ alertmanager_group }}"
+    mode: "0755"
+
+- name: Ensure Prometheus alertmanager directory structure exists
+  file:
+    state: "directory"
+    path: "{{ item }}"
+    owner: "{{ alertmanager_user }}"
+    group: "{{ alertmanager_group }}"
+  with_items:
+    - "{{ prometheus_root_dir }}"
+    - "{{ prometheus_dist_dir }}"
+    - "{{ alertmanager_server_dir }}"
+    - "{{ alertmanager_config_dir }}"
+
+- name: Download Prometheus alertmanager tarball from S3
+  vars:
+    ansible_python_interpreter: "{{ python_interpreter }}"
+  aws_s3:
+    bucket: "{{ resource_bucket_name }}"
+    object: "{{ resource_bucket_prefix }}/{{ alertmanager_tar_gz }}"
+    dest: "{{ prometheus_dist_dir }}/{{ alertmanager_tar_gz }}"
+    mode: get
+
+- name: Extract tarball
+  unarchive:
+    src: "{{ prometheus_dist_dir }}/{{ alertmanager_tar_gz }}"
+    dest: "{{ prometheus_dist_dir }}"
+    remote_src: yes
+    creates: "{{ prometheus_dist_dir }}/alertmanager-{{ alertmanager_version }}.linux-amd64/alertmanager"
+
+- name: Cleanup tarball
+  file:
+    state: absent
+    path: "{{ prometheus_dist_dir }}/{{ alertmanager_tar_gz }}"
+
+- name: Symlink to Prometheus alertmanager folder
+  file:
+    src: "{{ prometheus_dist_dir }}/alertmanager-{{ alertmanager_version }}.linux-amd64"
+    dest: "{{ alertmanager_server_dir }}"
+    state: link
+
+- name: Define default alertmanager config file
+  copy:
+    src: "alertmanager.yml"
+    dest: "{{ alertmanager_config_dir }}/alertmanager.yml"
+    mode: "0644"
+
+- name: Configure alertmanager service
+  template:
+    src: "{{ alertmanager_service_dir }}/alertmanager.service.j2"
+    dest: "/{{ alertmanager_service_dir }}/alertmanager.service"
+
+- name: Disable the alertmanager service
+  service:
+    name: alertmanager
+    enabled: no

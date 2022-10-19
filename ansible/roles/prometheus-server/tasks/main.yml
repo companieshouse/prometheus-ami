@@ -10,7 +10,7 @@
   become: yes
   user:
     name: "{{ prometheus_user }}"
-    group: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
     system: yes
 
 - name: Set ownership and permissions for root directory of mounted filesystem
