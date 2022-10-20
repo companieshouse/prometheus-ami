@@ -4,7 +4,8 @@ alertmanager_version: 0.24.0
 alertmanager_tar_gz: alertmanager-{{ alertmanager_version }}.linux-amd64.tar.gz
 
 prometheus_root_dir: /opt/prometheus
-prometheus_dist_dir: "{{ prometheus_root_dir }}/dist"
+prometheus_dist_dir: /opt/prometheus/dist
+# prometheus_dist_dir: "{{ prometheus_root_dir }}/dist"
 
 alertmanager_user: "alertmanager"
 alertmanager_group: "alertmanager"
