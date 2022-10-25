@@ -43,14 +43,19 @@ source "amazon-ebs" "builder" {
 
   subnet_filter {
     filters = {
-          "tag:Name": "${var.aws_subnet_filter_name}"
+      "tag:Name": "${var.aws_subnet_filter_name}"
     }
     most_free = true
     random = false
   }
 
+  run_tags = {
+    AMI     = "${var.ami_name_prefix}"
+    Service = "packer-builder"
+  }
+
   tags = {
-    Name    = "${var.ami_name_prefix}-${var.version}"
     Builder = "packer-{{packer_version}}"
+    Name    = "${var.ami_name_prefix}-${var.version}"
   }
 }
