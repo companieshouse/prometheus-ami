@@ -12,7 +12,7 @@ alertmanager_group: "alertmanager"
 alertmanager_config_dir: /etc/alertmanager
 # alertmanager_data_dir: /var/opt/alertmanager/data
 alertmanager_server_dir: "{{ prometheus_root_dir }}/alertmanager"
-alertmanager_service_dir: /etc/systemd/system/
+alertmanager_service_dir: "/etc/systemd/system/"
 
 # volume_mounts:
 #   - device: /dev/xvdc
