@@ -7,15 +7,15 @@ prometheus_root_dir: /opt/prometheus
 prometheus_config_dir: /etc/prometheus
 prometheus_server_dir: "{{ prometheus_root_dir }}/prometheus-server"
 prometheus_dist_dir: "{{ prometheus_root_dir }}/dist"
-prometheus_data_dir: /var/opt/prometheus/data
+# prometheus_data_dir: /var/opt/prometheus/data
 prometheus_service_dir: "etc/systemd/system/"
 
 prometheus_user: "prometheus"
 prometheus_group: "prometheus"
 
-volume_mounts:
-  - device: /dev/xvdb
-    file_system_type: ext4
-    logical_volume: prometheus
-    mount_point: "{{ prometheus_data_dir }}"
-    volume_group: data
+# volume_mounts:
+#   - device: /dev/xvdb
+#     file_system_type: ext4
+#     logical_volume: prometheus
+#     mount_point: "{{ prometheus_data_dir }}"
+#     volume_group: data

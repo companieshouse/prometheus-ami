@@ -3,7 +3,8 @@
 - hosts: prometheus
   become: true
   roles:
-    - mounted-volume
+    - aws-nvme-device-files
+      mounted-volume
     - epel
     - pip
     - docker-requirements

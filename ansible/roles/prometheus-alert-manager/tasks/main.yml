@@ -22,7 +22,6 @@
   with_items:
     - "{{ prometheus_root_dir }}"
     - "{{ prometheus_dist_dir }}"
-    - "{{ alertmanager_server_dir }}"
     - "{{ alertmanager_config_dir }}"
     - "{{ alertmanager_data_dir }}"
 
