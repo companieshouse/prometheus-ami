@@ -5,6 +5,10 @@ roles:
     name: aws-nvme-device-files
     version: 1.1.0
 
+  - src: https://github.com/companieshouse/ansible-role-mounted-volume
+    name: mounted-volume
+    version: "1.0.5"
+
   - src: https://github.com/companieshouse/ansible-role-epel
     name: epel
     version: 3.0.4
