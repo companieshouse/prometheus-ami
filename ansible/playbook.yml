@@ -4,7 +4,7 @@
   become: true
   roles:
     - aws-nvme-device-files
-      mounted-volume
+    - mounted-volume
     - epel
     - pip
     - docker-requirements
