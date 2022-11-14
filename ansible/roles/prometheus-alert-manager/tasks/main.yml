@@ -69,7 +69,6 @@
   template:
     src: "{{ alertmanager_service_dir }}/alertmanager.service.j2"
     dest: "/{{ alertmanager_service_dir }}/alertmanager.service"
-    mode: "0644"
 
 - name: Disable the alertmanager service
   service:
