@@ -5,19 +5,13 @@ variable "ami_account_ids" {
 
 variable "ami_name_prefix" {
   type        = string
-  default     = "prometheus-ami"
-  description = "The prefix string that will be used for the name tags of the resulting AMI and snapshot(s); the version string will be appended automatically"
-}
-
-variable "ansible_host_alias" {
-  type        = string
   default     = "prometheus"
-  description = "The Ansible host alias"
+  description = "The prefix string that will be used for the name tags of the resulting AMI and snapshot(s); the version string will be appended automatically"
 }
 
 variable "aws_instance_type" {
   type        = string
-  default     = "t3.small"
+  default     = "t3.medium"
   description = "The EC2 instance type used when building the AMI"
 }
 
@@ -29,19 +23,24 @@ variable "aws_region" {
 
 variable "aws_source_ami_filter_name" {
   type        = string
-  default     = "amzn2-ami-hvm-2.0*x86_64-gp2"
+  default     = "amzn2-base-*"
   description = "The source AMI filter string. Any filter described by the DescribeImages API documentation is valid. If multiple images match then the latest will be used"
 }
 
 variable "aws_source_ami_owner_id" {
   type        = string
-  default     = "137112412989"
   description = "The source AMI owner ID; used in combination with aws_source_ami_filter_name to filter for matching source AMIs"
 }
 
 variable "aws_subnet_filter_name" {
   type        = string
   description = "The subnet filter string. Any filter described by the DescribeSubnets API documentation is valid. If multiple subnets match then the one with the most IPv4 addresses free will be used"
+}
+
+variable "configuration_group" {
+  type        = string
+  default     = "prometheus"
+  description = "The name of the group to which to add the instance for configuration purposes"
 }
 
 variable "force_delete_snapshot" {

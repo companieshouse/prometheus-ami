@@ -10,15 +10,8 @@
   become: yes
   user:
     name: "{{ prometheus_user }}"
-    group: "{{ prometheus_user }}"
-    system: yes
-
-- name: Set ownership and permissions for root directory of mounted filesystem
-  file:
-    path: "{{ prometheus_data_dir }}"
-    owner: "{{ prometheus_user }}"
     group: "{{ prometheus_group }}"
-    mode: "0755"
+    system: yes
 
 - name: Ensure Prometheus directory structure exists
   file:
@@ -30,6 +23,14 @@
     - "{{ prometheus_root_dir }}"
     - "{{ prometheus_dist_dir }}"
     - "{{ prometheus_config_dir }}"
+    - "{{ prometheus_data_dir }}"
+
+- name: Set ownership and permissions for root directory of mounted filesystem
+  file:
+    path: "{{ prometheus_data_dir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: "0755"
 
 - name: Download Prometheus tarball from S3
   vars:

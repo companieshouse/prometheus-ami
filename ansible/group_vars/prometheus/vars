@@ -1,0 +1,28 @@
+---
+
+python_interpreter: /usr/bin/python3
+pip_install_packages:
+  - name: boto3
+  - name: botocore
+  - name: docker-py
+
+github_exporter_tag: "release-1.0.2"
+
+node_exporter_version: 1.0.1
+
+volume_mounts:
+  - device: /dev/xvdb
+    file_system_type: ext4
+    logical_volume: data
+    mount_point: "{{ prometheus_data_dir }}"
+    volume_group: prometheus
+
+  - device: /dev/xvdc
+    file_system_type: ext4
+    logical_volume: data
+    mount_point: "{{ alertmanager_data_dir }}"
+    volume_group: alertmanager
+
+
+alertmanager_data_dir: /var/opt/alertmanager/data
+prometheus_data_dir: /var/opt/prometheus/data

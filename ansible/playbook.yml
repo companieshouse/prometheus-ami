@@ -3,6 +3,7 @@
 - hosts: prometheus
   become: true
   roles:
+    - aws-nvme-device-files
     - mounted-volume
     - epel
     - pip
@@ -11,3 +12,4 @@
     - prometheus-server
     - prometheus-github-exporter
     - prometheus-node-exporter
+    - prometheus-alert-manager
