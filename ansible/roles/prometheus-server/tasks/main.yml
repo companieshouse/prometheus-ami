@@ -67,6 +67,12 @@
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     mode: "0644"
 
+- name: Define default prometheus rules file
+  copy:
+    src: "prometheus_rules.yml"
+    dest: "{{ prometheus_config_dir }}/prometheus_rules.yml"
+    mode: "0644"
+
 - name: Configure prometheus service
   template:
     src: "{{ prometheus_service_dir }}/prometheus.service.j2"

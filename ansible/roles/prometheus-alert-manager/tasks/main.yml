@@ -47,8 +47,8 @@
     dest: "{{ prometheus_dist_dir }}"
     remote_src: yes
     creates: "{{ prometheus_dist_dir }}/alertmanager-{{ alertmanager_version }}.linux-amd64/alertmanager"
-    owner: "{{ prometheus_user }}"
-    group: "{{ prometheus_group }}"    
+    owner: "{{ alertmanager_user }}"
+    group: "{{ alertmanager_group }}"    
 
 - name: Cleanup tarball
   file:
