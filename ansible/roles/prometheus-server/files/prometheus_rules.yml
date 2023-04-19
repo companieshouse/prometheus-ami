@@ -3,9 +3,9 @@ groups:
   rules:
   - alert: InstanceDown
     expr: up == 0
-    for: 1m
+    for: 10m
     labels:
       severity: "critical"
     annotations:
       summary: "Endpoint {{ $labels.hostname }} down"
-      description: "{{ $labels.hostname }} of job {{ $labels.job }} has been down for more than 1 minutes."
+      description: "{{ $labels.hostname }} of job {{ $labels.job }} has been down for more than 10 minutes."

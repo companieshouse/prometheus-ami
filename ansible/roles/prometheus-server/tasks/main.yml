@@ -72,6 +72,8 @@
     src: "prometheus_rules.yml"
     dest: "{{ prometheus_config_dir }}/prometheus_rules.yml"
     mode: "0644"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
 
 - name: Configure prometheus service
   template:

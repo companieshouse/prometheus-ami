@@ -9,13 +9,15 @@ route:
   receiver: 'email'
 receivers:
 - name: 'email'
-  email_configs:
-  - to: ''
-    from: ''
-    smarthost: ''
-    auth_username: ''
-    auth_identity: ''
-    auth_password: ''
+  #email_configs:
+  #- to: ''
+  #  from: ''
+  #  smarthost: ''
+  #  auth_username: ''
+  #  auth_identity: ''
+  #  auth_password: ''
+  #  require_tls: false
+  # send_resolved: true
 inhibit_rules:
   - source_match:
       severity: 'critical'
