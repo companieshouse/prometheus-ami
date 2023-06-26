@@ -47,6 +47,8 @@
     dest: "{{ prometheus_dist_dir }}"
     remote_src: yes
     creates: "{{ prometheus_dist_dir }}/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
 
 - name: Cleanup tarball
   file:
@@ -64,6 +66,14 @@
     src: "prometheus.yml"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     mode: "0644"
+
+- name: Define default prometheus rules file
+  copy:
+    src: "prometheus_rules.yml"
+    dest: "{{ prometheus_config_dir }}/prometheus_rules.yml"
+    mode: "0644"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
 
 - name: Configure prometheus service
   template:
